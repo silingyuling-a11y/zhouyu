@@ -7,99 +7,237 @@
     <meta name="description" content="广州电信宽带办理，周振宇区域客户经理，家庭宽带300M/1000M/2000M，政企专线，企业组网，广州全市可办。" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f7fa; color: #333; line-height: 1.6;
+        }
         a { text-decoration: none; color: inherit; }
 
-        /* Hero Section */
+        /* ── Nav ── */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(0,43,122,0.92); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; height: 56px;
+            box-shadow: 0 1px 12px rgba(0,0,0,0.15);
+        }
+        .nav .logo {
+            display: flex; align-items: center; gap: 10px;
+            color: #fff; font-weight: 700; font-size: 1.05em;
+        }
+        .nav .logo .dot { display: inline-block; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; margin-right: 2px; }
+        .nav .menu { display: flex; gap: 20px; list-style: none; }
+        .nav .menu a { color: rgba(255,255,255,0.8); font-size: 0.85em; transition: 0.2s; }
+        .nav .menu a:hover { color: #ffd700; }
+        .nav .menu .hot { background: #ffd700; color: #002b7a; padding: 2px 12px; border-radius: 12px; font-weight: 600; }
+
+        /* ── Floating Call Button ── */
+        .float-call {
+            position: fixed; bottom: 28px; right: 28px; z-index: 99;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #002b7a; font-size: 28px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(255,215,0,0.4);
+            transition: 0.25s; text-decoration: none;
+            animation: pulse-call 2s infinite;
+        }
+        .float-call:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,215,0,0.6); }
+        @keyframes pulse-call {
+            0%,100% { box-shadow: 0 4px 20px rgba(255,215,0,0.4); }
+            50% { box-shadow: 0 4px 35px rgba(255,215,0,0.7); }
+        }
+
+        /* ── Hero ── */
         .hero {
+            margin-top: 56px;
             background: linear-gradient(135deg, #002b7a 0%, #0047a3 50%, #0066cc 100%);
-            color: #fff;
-            padding: 60px 20px 50px;
-            text-align: center;
+            color: #fff; padding: 70px 20px 56px; text-align: center;
+            position: relative; overflow: hidden;
         }
-        .hero h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
-        .hero .subtitle { font-size: 1em; opacity: 0.9; margin-bottom: 20px; }
-        .hero .info-grid {
+        .hero::before {
+            content: ""; position: absolute; top: -40%; left: -20%;
+            width: 140%; height: 140%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0,102,204,0.3) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.3em; font-weight: 800; margin-bottom: 4px; letter-spacing: 1px; position: relative; }
+        .hero .subtitle { font-size: 1em; opacity: 0.85; margin-bottom: 24px; position: relative; }
+        .hero .info-card {
             display: inline-block; text-align: left;
-            background: rgba(255,255,255,0.1); border-radius: 12px;
-            padding: 20px 28px; max-width: 520px; margin: 0 auto;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(6px);
+            border-radius: 16px; padding: 22px 28px;
+            max-width: 540px; margin: 0 auto; position: relative;
+            border: 1px solid rgba(255,255,255,0.12);
         }
-        .hero .info-grid .row { margin: 6px 0; font-size: 0.95em; display: flex; align-items: flex-start; gap: 8px; }
-        .hero .info-grid .row .icon { flex-shrink: 0; }
-        .hero .info-grid .highlight { background: #ffd700; color: #002b7a; padding: 2px 10px; border-radius: 4px; font-weight: 600; display: inline-block; margin-top: 6px; font-size: 0.92em; }
+        .hero .info-card .row {
+            margin: 7px 0; font-size: 0.93em;
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        .hero .info-card .highlight {
+            background: #ffd700; color: #002b7a; padding: 3px 14px;
+            border-radius: 6px; font-weight: 700;
+            display: inline-block; margin-top: 6px; font-size: 0.92em;
+        }
         .hero .contact-btn {
-            display: inline-block; margin-top: 18px;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 20px;
             background: #ffd700; color: #002b7a; font-weight: 700;
-            padding: 12px 36px; border-radius: 30px; font-size: 1.1em;
-            transition: all 0.2s;
+            padding: 14px 40px; border-radius: 30px; font-size: 1.1em;
+            transition: 0.22s; position: relative;
         }
-        .hero .contact-btn:hover { background: #ffe44d; transform: translateY(-1px); }
+        .hero .contact-btn:hover { background: #ffe44d; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,215,0,0.3); }
 
-        /* Section */
-        .section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-        .section-title { font-size: 1.5em; font-weight: 700; margin-bottom: 8px; text-align: center; }
-        .section-subtitle { text-align: center; color: #666; margin-bottom: 28px; font-size: 0.95em; }
+        /* ── Scrolling Banner ── */
+        .scroll-banner {
+            background: #e8f0fe; padding: 12px 20px; text-align: center;
+            font-size: 0.92em; color: #0047a3; font-weight: 500;
+            border-bottom: 1px solid #d0ddf0;
+            overflow: hidden; white-space: nowrap;
+        }
+        .scroll-banner .inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
 
-        /* Card Grid */
-        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        /* ── Section ── */
+        .section { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+        .section-title { font-size: 1.55em; font-weight: 700; margin-bottom: 6px; text-align: center; }
+        .section-title .accent { color: #0047a3; }
+        .section-subtitle { text-align: center; color: #888; margin-bottom: 32px; font-size: 0.95em; }
+        .section-line {
+            width: 50px; height: 3px; background: #0047a3;
+            margin: 0 auto 24px; border-radius: 2px;
+        }
+
+        /* ── Card Grid ── */
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
         @media (max-width: 860px) { .card-grid { grid-template-columns: 1fr; } }
         .card {
-            background: #fff; border-radius: 14px; padding: 28px 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: all 0.2s;
-            border: 1px solid #eef0f3;
+            background: #fff; border-radius: 16px; padding: 32px 26px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.05); transition: 0.25s;
+            border: 1px solid #eef0f3; position: relative; overflow: hidden;
         }
-        .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.10); transform: translateY(-2px); }
-        .card .emoji-badge { font-size: 2em; margin-bottom: 8px; }
-        .card h3 { font-size: 1.15em; margin-bottom: 4px; }
-        .card .price { font-size: 1.8em; font-weight: 800; color: #0047a3; margin: 8px 0; }
-        .card .price span { font-size: 0.5em; font-weight: 400; color: #888; }
-        .card ul { list-style: none; margin: 12px 0; }
-        .card ul li { margin: 5px 0; font-size: 0.92em; color: #555; padding-left: 16px; position: relative; }
-        .card ul li::before { content: "●"; position: absolute; left: 0; color: #0047a3; }
-        .card .tag { display: inline-block; background: #e8f0fe; color: #0047a3; font-size: 0.8em; padding: 2px 10px; border-radius: 12px; margin-top: 10px; }
-        .card .cta { display: block; text-align: center; margin-top: 16px; color: #0047a3; font-weight: 600; font-size: 0.9em; }
+        .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-4px); }
+        .card .badge {
+            position: absolute; top: 14px; right: -28px;
+            background: #ff6b35; color: #fff; font-size: 0.75em;
+            font-weight: 700; padding: 4px 36px; transform: rotate(45deg);
+        }
+        .card .badge.popular { background: #0047a3; }
+        .card .emoji-badge { font-size: 2.2em; margin-bottom: 8px; }
+        .card h3 { font-size: 1.18em; margin-bottom: 4px; }
+        .card .price { font-size: 2em; font-weight: 800; color: #0047a3; margin: 10px 0 6px; }
+        .card .price span { font-size: 0.45em; font-weight: 400; color: #999; }
+        .card .price .custom { font-size: 0.55em; color: #666; font-weight: 500; }
+        .card ul { list-style: none; margin: 14px 0; }
+        .card ul li {
+            margin: 6px 0; font-size: 0.92em; color: #555;
+            padding-left: 18px; position: relative;
+        }
+        .card ul li::before { content: "●"; position: absolute; left: 0; color: #0047a3; font-size: 0.8em; top: 2px; }
+        .card .tag {
+            display: inline-block; background: #e8f0fe; color: #0047a3;
+            font-size: 0.8em; padding: 3px 12px; border-radius: 14px; margin-top: 10px;
+        }
+        .card .cta {
+            display: block; text-align: center; margin-top: 18px;
+            color: #0047a3; font-weight: 600; font-size: 0.9em;
+            padding: 8px; border-radius: 8px; transition: 0.2s;
+        }
+        .card .cta:hover { background: #e8f0fe; }
 
-        /* Why Section */
+        /* ── Why Section ── */
         .why-section { background: #fff; }
-        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
         @media (max-width: 700px) { .why-grid { grid-template-columns: repeat(2,1fr); } }
         .why-card {
-            background: #f5f7fa; border-radius: 12px; padding: 20px; text-align: center;
+            background: #f5f7fa; border-radius: 14px; padding: 24px 16px;
+            text-align: center; transition: 0.2s;
         }
-        .why-card .icon { font-size: 2em; margin-bottom: 8px; }
-        .why-card h4 { font-size: 0.95em; margin-bottom: 4px; }
-        .why-card p { font-size: 0.85em; color: #666; }
+        .why-card:hover { background: #e8f0fe; transform: translateY(-2px); }
+        .why-card .icon { font-size: 2.2em; margin-bottom: 10px; }
+        .why-card h4 { font-size: 0.98em; margin-bottom: 4px; }
+        .why-card p { font-size: 0.85em; color: #777; }
 
-        /* Footer */
+        /* ── Stats ── */
+        .stats {
+            display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+            margin-top: 30px; text-align: center;
+        }
+        .stats .item .num { font-size: 1.8em; font-weight: 800; color: #0047a3; }
+        .stats .item .label { font-size: 0.82em; color: #888; margin-top: 2px; }
+
+        /* ── Footer ── */
         .footer {
             background: #002b7a; color: #fff; text-align: center;
-            padding: 30px 20px; font-size: 0.85em;
+            padding: 40px 20px 32px; font-size: 0.85em;
         }
+        .footer .phone { font-size: 1.4em; font-weight: 700; margin: 8px 0; letter-spacing: 1px; }
+        .footer .social { display: flex; justify-content: center; gap: 24px; margin: 14px 0; font-size: 1.6em; }
         .footer a { color: #ffd700; }
-        .footer .phone { font-size: 1.3em; font-weight: 700; margin: 8px 0; }
+        .footer .sep { opacity: 0.4; margin: 0 8px; }
+
+        /* ── Scroll Animation ── */
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
+<!-- Nav -->
+<nav class="nav">
+    <div class="logo">
+        <span><span class="dot"></span>中国电信 · 广州</span>
+    </div>
+    <ul class="menu">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#family">家庭宽带</a></li>
+        <li><a href="#enterprise">政企方案</a></li>
+        <li><a href="#why">为什么选我</a></li>
+        <li><a href="tel:18102701371" class="hot">📞 立刻咨询</a></li>
+    </ul>
+</nav>
+
+<!-- Floating Call Button -->
+<a class="float-call" href="tel:18102701371" title="立即致电">📞</a>
+
 <!-- Hero -->
-<div class="hero">
+<div class="hero" id="home">
     <h1>周振宇 · 区域客户经理</h1>
-    <p class="subtitle">🏢 中国电信广州分公司｜区域客户经理</p>
-    <div class="info-grid">
-        <div class="row"><span class="icon">📍</span><span>服务范围：广州市全区域 企业专线/组网 家庭宽带 固话/IPTV 政企ICT</span></div>
-        <div class="row"><span class="icon">📱</span><span>手机/微信：181 0270 1371（24小时可加微信）</span></div>
-        <div class="row"><span class="icon">✉️</span><span>邮箱：silingyuling@163.com</span></div>
-        <div class="row"><span class="icon">⭐</span><span class="highlight">客户经理直通：快速办理，专属优惠，售后直达</span></div>
+    <p class="subtitle">🏢 中国电信广州分公司 ｜ 客户经理直通</p>
+    <div class="info-card">
+        <div class="row"><span>📍</span><span>服务范围：广州市全区域 企业专线/组网 家庭宽带 固话/IPTV 政企ICT</span></div>
+        <div class="row"><span>📱</span><span>手机/微信：181 0270 1371（24小时可加微信）</span></div>
+        <div class="row"><span>✉️</span><span>邮箱：silingyuling@163.com</span></div>
+        <div class="row"><span>⭐</span><span class="highlight">客户经理直通：快速办理，专属优惠，售后直达</span></div>
     </div>
     <a class="contact-btn" href="tel:18102701371">📞 立即咨询：181 0270 1371</a>
 </div>
 
+<!-- Scroll Banner -->
+<div class="scroll-banner">
+    <span class="inner">
+        🎉 欢迎咨询广州电信宽带业务！家庭光纤低至129元/月 ｜ 企业专线快速审批 ｜ 客户经理直通，优惠更多 ｜ 👉 电话/微信：181 0270 1371
+        &nbsp;&nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp;&nbsp;
+        🎉 欢迎咨询广州电信宽带业务！家庭光纤低至129元/月 ｜ 企业专线快速审批 ｜ 客户经理直通，优惠更多 ｜ 👉 电话/微信：181 0270 1371
+    </span>
+</div>
+
 <!-- 家庭宽带 -->
-<div class="section">
-    <h2 class="section-title">🚀 家庭宽带套餐</h2>
+<div class="section" id="family">
+    <h2 class="section-title"><span class="accent">🚀</span> 家庭宽带套餐</h2>
+    <div class="section-line"></div>
     <p class="section-subtitle">广州电信官方渠道，正规办理，合同发票齐全</p>
     <div class="card-grid">
-        <div class="card">
+        <div class="card fade-up">
             <div class="emoji-badge">🌐</div>
             <h3>极速光纤 · 300M</h3>
             <div class="price">¥129 <span>/月</span></div>
@@ -111,7 +249,8 @@
             <div class="tag">家庭入门首选</div>
             <div class="cta">👉 点击咨询详情</div>
         </div>
-        <div class="card">
+        <div class="card fade-up">
+            <div class="badge popular">🔥 最受欢迎</div>
             <div class="emoji-badge">⚡</div>
             <h3>全家享套餐 · 1000M</h3>
             <div class="price">¥229 <span>/月</span></div>
@@ -124,7 +263,7 @@
             <div class="tag">🔥 最受欢迎</div>
             <div class="cta">👉 点击咨询详情</div>
         </div>
-        <div class="card">
+        <div class="card fade-up">
             <div class="emoji-badge">🚀</div>
             <h3>极致高速套餐 · 2000M</h3>
             <div class="price">¥299 <span>/月</span></div>
@@ -141,15 +280,16 @@
 </div>
 
 <!-- 政企方案 -->
-<div class="section" style="background:#fff;max-width:100%;">
-    <div style="max-width:1100px;margin:0 auto;padding:40px 20px;">
-        <h2 class="section-title">🏢 政企 &amp; 商业客户方案</h2>
+<div class="section" style="background:#fff;max-width:100%;" id="enterprise">
+    <div style="max-width:1100px;margin:0 auto;padding:50px 20px;">
+        <h2 class="section-title"><span class="accent">🏢</span> 政企 &amp; 商业客户方案</h2>
+        <div class="section-line"></div>
         <p class="section-subtitle">企业宽带、专线、组网，定制化方案</p>
         <div class="card-grid">
-            <div class="card">
+            <div class="card fade-up">
                 <div class="emoji-badge">🔗</div>
                 <h3>企业专线 · 对等光纤</h3>
-                <div class="price">定制报价</div>
+                <div class="price"><span class="custom">定制报价</span></div>
                 <ul>
                     <li>50M~10G 对等带宽</li>
                     <li>固定IP / 云专线 / SD-WAN</li>
@@ -158,7 +298,7 @@
                 <div class="tag">快速审批</div>
                 <div class="cta">👉 点击咨询详情</div>
             </div>
-            <div class="card">
+            <div class="card fade-up">
                 <div class="emoji-badge">🏨</div>
                 <h3>酒店/公寓/园区批量方案</h3>
                 <ul>
@@ -168,7 +308,7 @@
                 </ul>
                 <div class="cta">👉 点击咨询详情</div>
             </div>
-            <div class="card">
+            <div class="card fade-up">
                 <div class="emoji-badge">☁️</div>
                 <h3>政企组网+安全+云</h3>
                 <ul>
@@ -184,10 +324,11 @@
 
 <!-- 更多产品 -->
 <div class="section">
-    <h2 class="section-title">📦 更多产品/方案介绍</h2>
+    <h2 class="section-title"><span class="accent">📦</span> 增值服务</h2>
+    <div class="section-line"></div>
     <p class="section-subtitle">智慧家庭 &amp; 企业增值服务</p>
     <div class="card-grid">
-        <div class="card">
+        <div class="card fade-up">
             <div class="emoji-badge">📺</div>
             <h3>天翼智屏</h3>
             <p style="margin:6px 0;font-size:0.9em;color:#888;">五大核心功能</p>
@@ -197,7 +338,7 @@
             </ul>
             <div class="cta">👉 点击了解详情</div>
         </div>
-        <div class="card">
+        <div class="card fade-up">
             <div class="emoji-badge">🏘️</div>
             <h3>智慧社区方案</h3>
             <p style="margin:6px 0;font-size:0.9em;color:#888;">即将推出</p>
@@ -207,7 +348,7 @@
             </ul>
             <div class="cta">👉 点击了解详情</div>
         </div>
-        <div class="card">
+        <div class="card fade-up">
             <div class="emoji-badge">💾</div>
             <h3>企业云盘服务</h3>
             <p style="margin:6px 0;font-size:0.9em;color:#888;">敬请期待</p>
@@ -221,29 +362,46 @@
 </div>
 
 <!-- 为什么选择 -->
-<div class="section why-section">
-    <h2 class="section-title">📌 为什么选择客户经理直连？</h2>
+<div class="section why-section" id="why">
+    <h2 class="section-title"><span class="accent">📌</span> 为什么选择客户经理直连？</h2>
+    <div class="section-line"></div>
     <p class="section-subtitle">正规渠道，专业服务，省心省力</p>
     <div class="why-grid">
-        <div class="why-card">
+        <div class="why-card fade-up">
             <div class="icon">✔️</div>
             <h4>官方在职员工</h4>
-            <p>广州电信在职客户经理，工号可查，合同发票齐全</p>
+            <p>广州电信在职客户经理<br>工号可查，合同发票齐全</p>
         </div>
-        <div class="why-card">
+        <div class="why-card fade-up">
             <div class="icon">⚡</div>
             <h4>快速响应</h4>
-            <p>快速预约上门勘察，重点企业当天响应</p>
+            <p>快速预约上门勘察<br>重点企业当天响应</p>
         </div>
-        <div class="why-card">
+        <div class="why-card fade-up">
             <div class="icon">💰</div>
             <h4>专属优惠</h4>
-            <p>享受额外客户经理特批优惠，优于官网和营业厅方案</p>
+            <p>享受额外客户经理特批优惠<br>优于官网和营业厅方案</p>
         </div>
-        <div class="why-card">
+        <div class="why-card fade-up">
             <div class="icon">👨‍💼</div>
             <h4>一对一服务</h4>
-            <p>企业客户一对一方案设计，售后问题直达客户经理</p>
+            <p>企业客户一对一方案设计<br>售后问题直达客户经理</p>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="item">
+            <div class="num">2000+</div>
+            <div class="label">服务家庭</div>
+        </div>
+        <div class="item">
+            <div class="num">200+</div>
+            <div class="label">企业客户</div>
+        </div>
+        <div class="item">
+            <div class="num">98%</div>
+            <div class="label">客户满意率</div>
         </div>
     </div>
 </div>
@@ -252,10 +410,33 @@
 <div class="footer">
     <p>周振宇 · 中国电信广州分公司 区域客户经理</p>
     <div class="phone">📱 181 0270 1371</div>
-    <p>微信同号 | 24小时可加微信</p>
+    <p>微信同号 ｜ 24小时可加微信</p>
     <p style="margin-top:12px;opacity:0.7;">服务范围：广州市全区域 · 家庭宽带 · 企业专线 · 固话IPTV · 政企ICT</p>
-    <p style="margin-top:12px;opacity:0.5;">本网站由我本人维护，非中国电信官方网站</p>
+    <p style="margin-top:14px;opacity:0.45;font-size:0.8em;">本网站由我本人维护，非中国电信官方网站</p>
 </div>
 
+<script>
+// Intersection Observer for fade-up
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav active state
+const menuLinks = document.querySelectorAll('.menu a');
+const sections = document.querySelectorAll('.section, .hero, .why-section');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 100) current = sec.id || '';
+    });
+    menuLinks.forEach(a => {
+        a.classList.remove('hot');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('hot');
+    });
+});
+</script>
 </body>
 </html>
